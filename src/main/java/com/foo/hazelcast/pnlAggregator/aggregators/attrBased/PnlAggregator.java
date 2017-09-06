@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.foo.hazelcast.pnlAggregator.aggregators.basic.SumAggregator;
-import com.foo.hazelcast.pnlAggregator.extractable.FieldExtractable;
 import com.foo.hazelcast.pnlAggregator.factory.SumAggregatorFactory;
 import com.foo.hazelcast.pnlAggregator.model.Pnl;
 import com.foo.hazelcast.pnlAggregator.model.PnlKey;
@@ -29,7 +28,7 @@ public class PnlAggregator extends Aggregator<Map.Entry<Long, Pnl>, Map<PnlKey, 
 
     private Map<PnlKey, Pnl> keyToPnl = new HashMap<>();
 
-    private List<FieldExtractable> keyAttributesInPnl;
+    private List<Pnl.Field> keyAttributesInPnl;
     
     private List<String> attributesToBeAggregatedInPnl;
 
@@ -76,7 +75,7 @@ public class PnlAggregator extends Aggregator<Map.Entry<Long, Pnl>, Map<PnlKey, 
         Pnl partialPnl = new Pnl();
         // find a solution for this.
         partialPnl.setPnlKey(new PnlKey());
-        for (FieldExtractable field: this.keyAttributesInPnl) {
+        for (Pnl.Field field: this.keyAttributesInPnl) {
         	String attr = field.getFieldName();
             Object attributeValue = pnl.getAttributeValue(attr);
             partialPnl.setAttributeValue(attr, attributeValue);
