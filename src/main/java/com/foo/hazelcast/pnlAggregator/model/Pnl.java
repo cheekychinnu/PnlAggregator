@@ -5,23 +5,45 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 import com.foo.hazelcast.pnlAggregator.extractable.AbstractCustomExtractable;
+import com.foo.hazelcast.pnlAggregator.extractable.FieldExtractable;
 import com.hazelcast.query.QueryException;
 import com.hazelcast.query.impl.AttributeType;
 
 public class Pnl extends  AbstractCustomExtractable implements Serializable {
 
+	public static enum Field implements FieldExtractable {
+		
+		DATE_FIELD(PnlKey.Field.DATE_FIELD.getFullyQualifiedFieldName()),
+		BOOK_ID_FIELD(PnlKey.Field.BOOK_ID_FIELD.getFullyQualifiedFieldName()),
+		CUSTODIAN_ACCOUNT_FIELD(PnlKey.Field.CUSTODIAN_ACCOUNT_FIELD.getFullyQualifiedFieldName()),
+		BUNDLE_ID_FIELD(PnlKey.Field.BUNDLE_ID_FIELD.getFullyQualifiedFieldName());
+		
+		private final String fieldName;
+		
+		Field(String fieldName){
+			this.fieldName = fieldName;
+		}
+		
+		public String getFieldName(){
+			return this.fieldName;
+		}
+		
+		public String getClassName() {
+			return "pnl";
+		}
+	}
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
 
-    public static String DATE_FIELD = String.join(".", "pnlKey", PnlKey.DATE_FIELD);
+//    public static String DATE_FIELD = String.join(".", "pnlKey", PnlKey.DATE_FIELD);
 
-    public static String BOOK_ID_FIELD = String.join(".", "pnlKey", PnlKey.BOOK_ID_FIELD);
+//    public static String BOOK_ID_FIELD = String.join(".", "pnlKey", PnlKey.BOOK_ID_FIELD);
 
-    public static String CUSTODIAN_ACCOUNT_FIELD = String.join(".", "pnlKey", PnlKey.CUSTODIAN_ACCOUNT_FIELD);
+//    public static String CUSTODIAN_ACCOUNT_FIELD = String.join(".", "pnlKey", PnlKey.CUSTODIAN_ACCOUNT_FIELD);
 
-    public static String BUNDLE_ID_FIELD = String.join(".", "pnlKey", PnlKey.BUNDLE_ID_FIELD);
+//    public static String BUNDLE_ID_FIELD = String.join(".", "pnlKey", PnlKey.BUNDLE_ID_FIELD);
 
     public static String DAY_LOCAL_FIELD = "dayLocal";
     

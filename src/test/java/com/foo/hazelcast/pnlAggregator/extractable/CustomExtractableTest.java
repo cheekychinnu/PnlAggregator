@@ -50,10 +50,10 @@ public class CustomExtractableTest {
         Pnl pnl = enhancedRandomForPnl.nextObject(Pnl.class);
         pnl.setPnlKey(null);
         
-        assertNull(pnl.getAttributeValue(Pnl.BOOK_ID_FIELD));
-        assertNull(pnl.getAttributeValue(Pnl.BUNDLE_ID_FIELD));
-        assertNull(pnl.getAttributeValue(Pnl.CUSTODIAN_ACCOUNT_FIELD));
-        assertNull(pnl.getAttributeValue(Pnl.DATE_FIELD));
+        assertNull(pnl.getAttributeValue(Pnl.Field.BOOK_ID_FIELD.getFieldName()));
+        assertNull(pnl.getAttributeValue(Pnl.Field.BUNDLE_ID_FIELD.getFieldName()));
+        assertNull(pnl.getAttributeValue(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName()));
+        assertNull(pnl.getAttributeValue(Pnl.Field.DATE_FIELD.getFieldName()));
         
         // attribute type should not matter if the nested object is null. since you can still query for type if the value is null
         assertGetAttributeType(pnl);
@@ -68,14 +68,14 @@ public class CustomExtractableTest {
     private void assertSetAttributeValue(Pnl pnl) {
         Integer integerValue = 100;
         
-        pnl.setAttributeValue(Pnl.BOOK_ID_FIELD, integerValue);
-        pnl.setAttributeValue(Pnl.BUNDLE_ID_FIELD, integerValue);
-        assertEquals(integerValue, pnl.getAttributeValue(Pnl.BOOK_ID_FIELD));
-        assertEquals(integerValue, pnl.getAttributeValue(Pnl.BUNDLE_ID_FIELD));
+        pnl.setAttributeValue(Pnl.Field.BOOK_ID_FIELD.getFieldName(), integerValue);
+        pnl.setAttributeValue(Pnl.Field.BUNDLE_ID_FIELD.getFieldName(), integerValue);
+        assertEquals(integerValue, pnl.getAttributeValue(Pnl.Field.BOOK_ID_FIELD.getFieldName()));
+        assertEquals(integerValue, pnl.getAttributeValue(Pnl.Field.BUNDLE_ID_FIELD.getFieldName()));
         
         String stringValue = "dummy";
-        pnl.setAttributeValue(Pnl.CUSTODIAN_ACCOUNT_FIELD, stringValue);
-        assertEquals(stringValue, pnl.getAttributeValue(Pnl.CUSTODIAN_ACCOUNT_FIELD));
+        pnl.setAttributeValue(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName(), stringValue);
+        assertEquals(stringValue, pnl.getAttributeValue(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName()));
 
         Double doubleValue = 900d;
         
@@ -104,29 +104,29 @@ public class CustomExtractableTest {
         assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.LAST_DAY_MONTH_LOCAL_FIELD));
         assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.LAST_DAY_MONTH_USD));
 
-        assertEquals(AttributeType.INTEGER, pnl.getAttributeType(Pnl.BOOK_ID_FIELD));
-        assertEquals(AttributeType.INTEGER, pnl.getAttributeType(Pnl.BUNDLE_ID_FIELD));
+        assertEquals(AttributeType.INTEGER, pnl.getAttributeType(Pnl.Field.BOOK_ID_FIELD.getFieldName()));
+        assertEquals(AttributeType.INTEGER, pnl.getAttributeType(Pnl.Field.BUNDLE_ID_FIELD.getFieldName()));
     }
 
     public void assertAtrributeTypeForUnsupportedTypes(Pnl pnl) {
         expectedException.expect(QueryException.class);
         expectedException.expectMessage(StringContains
-                .containsString(PnlKey.CUSTODIAN_ACCOUNT_FIELD + "'s type is not supported in aggregation as of now"));
-        pnl.getAttributeType(Pnl.CUSTODIAN_ACCOUNT_FIELD);
+                .containsString(PnlKey.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName() + "'s type is not supported in aggregation as of now"));
+        pnl.getAttributeType(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName());
 
         expectedException.expect(QueryException.class);
         expectedException.expect(
-                StringContains.containsString(PnlKey.DATE_FIELD + "'s type is not supported in aggregation as of now"));
-        pnl.getAttributeType(Pnl.DATE_FIELD);
+                StringContains.containsString(PnlKey.Field.DATE_FIELD.getFieldName() + "'s type is not supported in aggregation as of now"));
+        pnl.getAttributeType(Pnl.Field.DATE_FIELD.getFieldName());
 
     }
 
     private void assertGetFieldType(Pnl pnl) {
 
-        assertEquals(Integer.class, pnl.getFieldType(Pnl.BOOK_ID_FIELD));
-        assertEquals(Integer.class, pnl.getFieldType(Pnl.BUNDLE_ID_FIELD));
-        assertEquals(String.class, pnl.getFieldType(Pnl.CUSTODIAN_ACCOUNT_FIELD));
-        assertEquals(Date.class, pnl.getFieldType(Pnl.DATE_FIELD));
+        assertEquals(Integer.class, pnl.getFieldType(Pnl.Field.BOOK_ID_FIELD.getFieldName()));
+        assertEquals(Integer.class, pnl.getFieldType(Pnl.Field.BUNDLE_ID_FIELD.getFieldName()));
+        assertEquals(String.class, pnl.getFieldType(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName()));
+        assertEquals(Date.class, pnl.getFieldType(Pnl.Field.DATE_FIELD.getFieldName()));
 
         assertEquals(Double.class, pnl.getFieldType(Pnl.DAY_LOCAL_FIELD));
         assertEquals(Double.class, pnl.getFieldType(Pnl.DAY_USD));
@@ -139,10 +139,10 @@ public class CustomExtractableTest {
 
     private void assertGetAttributeValue(Pnl pnl) {
 
-        assertEquals(pnl.getPnlKey().getBookId(), pnl.getAttributeValue(Pnl.BOOK_ID_FIELD));
-        assertEquals(pnl.getPnlKey().getBundleId(), pnl.getAttributeValue(Pnl.BUNDLE_ID_FIELD));
-        assertEquals(pnl.getPnlKey().getCustodianAccount(), pnl.getAttributeValue(Pnl.CUSTODIAN_ACCOUNT_FIELD));
-        assertEquals(pnl.getPnlKey().getDate(), pnl.getAttributeValue(Pnl.DATE_FIELD));
+        assertEquals(pnl.getPnlKey().getBookId(), pnl.getAttributeValue(Pnl.Field.BOOK_ID_FIELD.getFieldName()));
+        assertEquals(pnl.getPnlKey().getBundleId(), pnl.getAttributeValue(Pnl.Field.BUNDLE_ID_FIELD.getFieldName()));
+        assertEquals(pnl.getPnlKey().getCustodianAccount(), pnl.getAttributeValue(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName()));
+        assertEquals(pnl.getPnlKey().getDate(), pnl.getAttributeValue(Pnl.Field.DATE_FIELD.getFieldName()));
 
         assertEquals(pnl.getDayLocal(), pnl.getAttributeValue(Pnl.DAY_LOCAL_FIELD));
         assertEquals(pnl.getDayUsd(), pnl.getAttributeValue(Pnl.DAY_USD));

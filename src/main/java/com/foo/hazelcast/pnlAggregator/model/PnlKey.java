@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.foo.hazelcast.pnlAggregator.extractable.AbstractCustomExtractable;
+import com.foo.hazelcast.pnlAggregator.extractable.FieldExtractable;
 import com.hazelcast.query.QueryException;
 import com.hazelcast.query.impl.AttributeType;
 
@@ -15,13 +16,34 @@ public class PnlKey extends AbstractCustomExtractable implements Serializable{
      */
     private static final long serialVersionUID = 1L;
 
-    public static String DATE_FIELD = "date";
+    public static enum Field implements FieldExtractable {
+		
+		DATE_FIELD("date"),
+		BOOK_ID_FIELD("bookId"),
+		CUSTODIAN_ACCOUNT_FIELD("custodianAccount"),
+		BUNDLE_ID_FIELD("bundleId");
+		
+		private final String fieldName;
+		
+		Field(String fieldName){
+			this.fieldName = fieldName;
+		}
+		
+		public String getFieldName(){
+			return this.fieldName;
+		}
+		
+		public String getClassName() {
+			return "pnlKey";
+		}
+	}
+//    public static String DATE_FIELD = "date";
 
-    public static String BOOK_ID_FIELD = "bookId";
+//    public static String BOOK_ID_FIELD = "bookId";
 
-    public static String CUSTODIAN_ACCOUNT_FIELD = "custodianAccount";
+//    public static String CUSTODIAN_ACCOUNT_FIELD = "custodianAccount";
 
-    public static String BUNDLE_ID_FIELD = "bundleId";
+//    public static String BUNDLE_ID_FIELD = "bundleId";
     
     private String custodianAccount;
 

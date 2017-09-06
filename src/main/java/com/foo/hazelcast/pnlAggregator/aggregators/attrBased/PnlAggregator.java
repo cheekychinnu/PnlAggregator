@@ -28,11 +28,11 @@ public class PnlAggregator extends Aggregator<Map.Entry<Long, Pnl>, Map<PnlKey, 
 
     private Map<PnlKey, Pnl> keyToPnl = new HashMap<>();
 
-    private List<String> keyAttributesInPnl;
+    private List<Pnl.Field> keyAttributesInPnl;
     
     private List<String> attributesToBeAggregatedInPnl;
 
-    public PnlAggregator(List<String> keyAttributes, String[] attributes) {
+    public PnlAggregator(List<Pnl.Field> keyAttributes, String[] attributes) {
         if(keyAttributes == null ||keyAttributes.isEmpty() || attributes == null ||attributes.length == 0) {
             throw new IllegalArgumentException("Key attributes and Aggregation attributes are mandatory for PnlAggregator");
         }
@@ -75,7 +75,8 @@ public class PnlAggregator extends Aggregator<Map.Entry<Long, Pnl>, Map<PnlKey, 
         Pnl partialPnl = new Pnl();
         // find a solution for this.
         partialPnl.setPnlKey(new PnlKey());
-        for (String attr: this.keyAttributesInPnl) {
+        for (Pnl.Field field: this.keyAttributesInPnl) {
+        	String attr = field.getFieldName();
             Object attributeValue = pnl.getAttributeValue(attr);
             partialPnl.setAttributeValue(attr, attributeValue);
         }

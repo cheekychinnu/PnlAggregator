@@ -32,10 +32,10 @@ public class PnlCacheServiceImpl implements PnlCacheService {
 
     private static final String PNL_MAP = "PnlMap";
     
-    Function<Date, Predicate<Long, Pnl>> dateEqualsPredicate = (d) ->  Predicates.equal(Pnl.DATE_FIELD, d);
-    Function<Integer, Predicate<Long, Pnl>> bundleIdEqualsPredicate = (b) ->  Predicates.equal(Pnl.BUNDLE_ID_FIELD, b);
-    Function<Integer, Predicate<Long, Pnl>> bookIdEqualsPredicate = (b) ->  Predicates.equal(Pnl.BOOK_ID_FIELD, b);
-    Function<String, Predicate<Long, Pnl>> custodianAccountEqualsPredicate = (c) ->  Predicates.equal(Pnl.CUSTODIAN_ACCOUNT_FIELD, c);
+    Function<Date, Predicate<Long, Pnl>> dateEqualsPredicate = (d) ->  Predicates.equal(Pnl.Field.DATE_FIELD.getFieldName(), d);
+    Function<Integer, Predicate<Long, Pnl>> bundleIdEqualsPredicate = (b) ->  Predicates.equal(Pnl.Field.BUNDLE_ID_FIELD.getFieldName(), b);
+    Function<Integer, Predicate<Long, Pnl>> bookIdEqualsPredicate = (b) ->  Predicates.equal(Pnl.Field.BOOK_ID_FIELD.getFieldName(), b);
+    Function<String, Predicate<Long, Pnl>> custodianAccountEqualsPredicate = (c) ->  Predicates.equal(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName(), c);
     
     @Autowired
     private HazelcastInstance hazelcastInstance;
@@ -134,7 +134,7 @@ public class PnlCacheServiceImpl implements PnlCacheService {
     @Override
     public Map<PnlKey, Pnl> aggregatePnlGroupedByBookBundleAndCustodianAccount(Date date, String[] attrbutesToAggregate) {
         Predicate<Long, Pnl> datePredicate = (entry) -> date.equals(entry.getValue().getPnlKey().getDate());
-        List<String> keys = Stream.of(Pnl.BOOK_ID_FIELD, Pnl.BUNDLE_ID_FIELD, Pnl.CUSTODIAN_ACCOUNT_FIELD).collect(Collectors.toList());
+        List<Pnl.Field> keys = Stream.of(Pnl.Field.BOOK_ID_FIELD, Pnl.Field.BUNDLE_ID_FIELD, Pnl.Field.CUSTODIAN_ACCOUNT_FIELD).collect(Collectors.toList());
         return idToPnlMap.aggregate(new PnlAggregator(keys, attrbutesToAggregate), datePredicate);
     }
 
@@ -148,7 +148,7 @@ public class PnlCacheServiceImpl implements PnlCacheService {
     @Override
     public Map<PnlKey, Pnl> aggregatePnlGroupedByBook(Date date, String[] attrbutesToAggregate) {
         Predicate<Long, Pnl> datePredicate = (entry) -> date.equals(entry.getValue().getPnlKey().getDate());
-        List<String> keys = Stream.of(Pnl.BOOK_ID_FIELD).collect(Collectors.toList());
+        List<Pnl.Field> keys = Stream.of(Pnl.Field.BOOK_ID_FIELD).collect(Collectors.toList());
         return idToPnlMap.aggregate(new PnlAggregator(keys, attrbutesToAggregate), datePredicate);
     }
 
