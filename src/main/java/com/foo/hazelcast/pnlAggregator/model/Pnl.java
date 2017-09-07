@@ -12,22 +12,30 @@ import com.hazelcast.query.impl.AttributeType;
 public class Pnl extends  AbstractCustomExtractable implements Serializable {
 
 	public static enum Field implements FieldExtractable {
-		
-		DATE_FIELD(PnlKey.Field.DATE_FIELD.getFullyQualifiedFieldName()),
-		BOOK_ID_FIELD(PnlKey.Field.BOOK_ID_FIELD.getFullyQualifiedFieldName()),
-		CUSTODIAN_ACCOUNT_FIELD(PnlKey.Field.CUSTODIAN_ACCOUNT_FIELD.getFullyQualifiedFieldName()),
-		BUNDLE_ID_FIELD(PnlKey.Field.BUNDLE_ID_FIELD.getFullyQualifiedFieldName());
+
+		DATE_FIELD(PnlKey.Field.DATE_FIELD.getFullyQualifiedFieldName()), 
+		BOOK_ID_FIELD(PnlKey.Field.BOOK_ID_FIELD.getFullyQualifiedFieldName()), 
+		CUSTODIAN_ACCOUNT_FIELD(PnlKey.Field.CUSTODIAN_ACCOUNT_FIELD.getFullyQualifiedFieldName()), 
+		BUNDLE_ID_FIELD(PnlKey.Field.BUNDLE_ID_FIELD.getFullyQualifiedFieldName()), 
+		DAY_LOCAL_FIELD("dayLocal"), 
+		LAST_DAY_LOCAL_FIELD("lastDayLocal"),
+		DAY_USD("dayUsd"),
+		LAST_DAY_USD("lastDayUsd"),
+		LAST_DAY_MONTH_LOCAL_FIELD("lastDayMonthLocal"),
+		LAST_DAY_MONTH_USD("lastDayMonthUsd"),
+		LAST_YEAR_LOCAL_FIELD("lastYearLocal"),
+		LAST_YEAR_USD("lastYearUsd");
 		
 		private final String fieldName;
-		
-		Field(String fieldName){
+
+		Field(String fieldName) {
 			this.fieldName = fieldName;
 		}
-		
-		public String getFieldName(){
+
+		public String getFieldName() {
 			return this.fieldName;
 		}
-		
+
 		public String getClassName() {
 			return "pnl";
 		}
@@ -45,21 +53,21 @@ public class Pnl extends  AbstractCustomExtractable implements Serializable {
 
 //    public static String BUNDLE_ID_FIELD = String.join(".", "pnlKey", PnlKey.BUNDLE_ID_FIELD);
 
-    public static String DAY_LOCAL_FIELD = "dayLocal";
+//    public static String DAY_LOCAL_FIELD = "dayLocal";
+//    
+//    public static String DAY_USD = "dayUsd";
+//    
+//    public static String LAST_DAY_LOCAL_FIELD = "lastDayLocal";
+//    
+//    public static String LAST_DAY_USD = "lastDayUsd";
+//    
+//    public static String LAST_DAY_MONTH_LOCAL_FIELD = "lastDayMonthLocal";
     
-    public static String DAY_USD = "dayUsd";
-    
-    public static String LAST_DAY_LOCAL_FIELD = "lastDayLocal";
-    
-    public static String LAST_DAY_USD = "lastDayUsd";
-    
-    public static String LAST_DAY_MONTH_LOCAL_FIELD = "lastDayMonthLocal";
-    
-    public static String LAST_DAY_MONTH_USD = "lastDayMonthUsd";
-    
-    public static String LAST_YEAR_LOCAL_FIELD = "lastYearLocal";
-    
-    public static String LAST_YEAR_USD = "lastYearUsd";
+//    public static String LAST_DAY_MONTH_USD = "lastDayMonthUsd";
+//    
+//    public static String LAST_YEAR_LOCAL_FIELD = "lastYearLocal";
+//    
+//    public static String LAST_YEAR_USD = "lastYearUsd";
 
     private long id;
 

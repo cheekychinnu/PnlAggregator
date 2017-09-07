@@ -105,7 +105,7 @@ public class PnlCacheServiceImpl implements PnlCacheService {
         Predicate<Long, Pnl> bookPredicate = (entry) -> bookId.equals(entry.getValue().getPnlKey().getBookId());
         Predicate<Date, Pnl> datePredicate = (entry) -> date.equals(entry.getValue().getPnlKey().getDate());
         // using in-built aggregator
-        return idToPnlMap.aggregate(new DoubleSumAggregator<Map.Entry<Long, Pnl>>(Pnl.DAY_LOCAL_FIELD), Predicates.and(datePredicate, bookPredicate));
+        return idToPnlMap.aggregate(new DoubleSumAggregator<Map.Entry<Long, Pnl>>(Pnl.Field.DAY_LOCAL_FIELD.getFieldName()), Predicates.and(datePredicate, bookPredicate));
         /*
          * Deprecated:
          *  return idToPnlMap.aggregate(Supplier.fromPredicate(bookPredicate,Supplier.all(Pnl::getDayLocal)), Aggregations.doubleSum());
@@ -132,7 +132,7 @@ public class PnlCacheServiceImpl implements PnlCacheService {
     }
     
     @Override
-    public Map<PnlKey, Pnl> aggregatePnlGroupedByBookBundleAndCustodianAccount(Date date, String[] attrbutesToAggregate) {
+    public Map<PnlKey, Pnl> aggregatePnlGroupedByBookBundleAndCustodianAccount(Date date, Pnl.Field[] attrbutesToAggregate) {
         Predicate<Long, Pnl> datePredicate = (entry) -> date.equals(entry.getValue().getPnlKey().getDate());
         List<Pnl.Field> keys = Stream.of(Pnl.Field.BOOK_ID_FIELD, Pnl.Field.BUNDLE_ID_FIELD, Pnl.Field.CUSTODIAN_ACCOUNT_FIELD).collect(Collectors.toList());
         return idToPnlMap.aggregate(new PnlAggregator(keys, attrbutesToAggregate), datePredicate);
@@ -146,7 +146,7 @@ public class PnlCacheServiceImpl implements PnlCacheService {
 
 
     @Override
-    public Map<PnlKey, Pnl> aggregatePnlGroupedByBook(Date date, String[] attrbutesToAggregate) {
+    public Map<PnlKey, Pnl> aggregatePnlGroupedByBook(Date date, Pnl.Field[] attrbutesToAggregate) {
         Predicate<Long, Pnl> datePredicate = (entry) -> date.equals(entry.getValue().getPnlKey().getDate());
         List<Pnl.Field> keys = Stream.of(Pnl.Field.BOOK_ID_FIELD).collect(Collectors.toList());
         return idToPnlMap.aggregate(new PnlAggregator(keys, attrbutesToAggregate), datePredicate);

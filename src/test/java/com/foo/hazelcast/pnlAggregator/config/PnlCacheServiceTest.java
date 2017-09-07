@@ -272,8 +272,8 @@ public class PnlCacheServiceTest {
         @Test
         public void testAggregatePnlAtBookLevel() {
 
-            Map<PnlKey, Pnl> aggregatedPnlMap = pnlCacheService.aggregatePnlGroupedByBook(date, new String[]{Pnl.DAY_LOCAL_FIELD,
-                    Pnl.DAY_USD});
+            Map<PnlKey, Pnl> aggregatedPnlMap = pnlCacheService.aggregatePnlGroupedByBook(date, new Pnl.Field[]{Pnl.Field.DAY_LOCAL_FIELD,
+                    Pnl.Field.DAY_USD});
 
             assertNotNull(aggregatedPnlMap);
             assertTrue(aggregatedPnlMap.keySet().size() > 1);
@@ -305,8 +305,8 @@ public class PnlCacheServiceTest {
         @Test
         public void testAggregatePnlAtGranularLevel() {
 
-            Map<PnlKey, Pnl> aggregatedPnlMap = pnlCacheService.aggregatePnlGroupedByBookBundleAndCustodianAccount(date, new String[]{Pnl.DAY_LOCAL_FIELD,
-                    Pnl.DAY_USD});
+            Map<PnlKey, Pnl> aggregatedPnlMap = pnlCacheService.aggregatePnlGroupedByBookBundleAndCustodianAccount(date, new Pnl.Field[]{Pnl.Field.DAY_LOCAL_FIELD,
+            		Pnl.Field.DAY_USD});
 
             assertNotNull(aggregatedPnlMap);
             assertTrue(aggregatedPnlMap.keySet().size() > 1);

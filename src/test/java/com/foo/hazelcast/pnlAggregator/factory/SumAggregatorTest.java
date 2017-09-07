@@ -78,7 +78,7 @@ public class SumAggregatorTest {
         
         Double expectedSum =  source.getDayLocal() + destination.getDayLocal();
                 
-        String attr = Pnl.DAY_LOCAL_FIELD;
+        String attr = Pnl.Field.DAY_LOCAL_FIELD.getFieldName();
         
         Class<?> fieldType = source.getFieldType(attr);
         assertTrue(fieldType.equals(Double.class));

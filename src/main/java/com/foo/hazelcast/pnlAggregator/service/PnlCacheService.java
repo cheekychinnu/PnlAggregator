@@ -33,7 +33,7 @@ public interface PnlCacheService {
     Map<Integer, Double> getSumOfDayLocalForPnlsGroupedByDateAndBook(Date date);
 
     // use of aggregation - grouping by - multiple attribute - CUSTOM AGGREGATION
-    Map<PnlKey, Pnl> aggregatePnlGroupedByBookBundleAndCustodianAccount(Date date, String[] attrbutesToAggregate);
-    Map<PnlKey, Pnl> aggregatePnlGroupedByBook(Date date, String[] attrbutesToAggregate);
+    Map<PnlKey, Pnl> aggregatePnlGroupedByBookBundleAndCustodianAccount(Date date, Pnl.Field[] attrbutesToAggregate);
+    Map<PnlKey, Pnl> aggregatePnlGroupedByBook(Date date, Pnl.Field[] attrbutesToAggregate);
 
 }

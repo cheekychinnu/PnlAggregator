@@ -79,30 +79,30 @@ public class CustomExtractableTest {
 
         Double doubleValue = 900d;
         
-        pnl.setAttributeValue(Pnl.DAY_LOCAL_FIELD,doubleValue);
-        pnl.setAttributeValue(Pnl.DAY_USD,doubleValue);
-        pnl.setAttributeValue(Pnl.LAST_DAY_LOCAL_FIELD,doubleValue);
-        pnl.setAttributeValue(Pnl.LAST_DAY_USD,doubleValue);
-        pnl.setAttributeValue(Pnl.LAST_DAY_MONTH_LOCAL_FIELD,doubleValue);
-        pnl.setAttributeValue(Pnl.LAST_DAY_MONTH_USD,doubleValue);
+        pnl.setAttributeValue(Pnl.Field.DAY_LOCAL_FIELD.getFieldName(),doubleValue);
+        pnl.setAttributeValue(Pnl.Field.DAY_USD.getFieldName(),doubleValue);
+        pnl.setAttributeValue(Pnl.Field.LAST_DAY_LOCAL_FIELD.getFieldName(),doubleValue);
+        pnl.setAttributeValue(Pnl.Field.LAST_DAY_USD.getFieldName(),doubleValue);
+        pnl.setAttributeValue(Pnl.Field.LAST_DAY_MONTH_LOCAL_FIELD.getFieldName(),doubleValue);
+        pnl.setAttributeValue(Pnl.Field.LAST_DAY_MONTH_USD.getFieldName(),doubleValue);
         
-        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.DAY_LOCAL_FIELD));
-        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.DAY_USD));
-        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.LAST_DAY_LOCAL_FIELD));
-        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.LAST_DAY_USD));
-        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.LAST_DAY_MONTH_LOCAL_FIELD));
-        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.LAST_DAY_MONTH_USD));
+        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.Field.DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.Field.DAY_USD.getFieldName()));
+        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.Field.LAST_DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.Field.LAST_DAY_USD.getFieldName()));
+        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.Field.LAST_DAY_MONTH_LOCAL_FIELD.getFieldName()));
+        assertEquals(doubleValue, pnl.getAttributeValue(Pnl.Field.LAST_DAY_MONTH_USD.getFieldName()));
 
     }
 
     private void assertGetAttributeType(Pnl pnl) {
 
-        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.DAY_LOCAL_FIELD));
-        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.DAY_USD));
-        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.LAST_DAY_LOCAL_FIELD));
-        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.LAST_DAY_USD));
-        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.LAST_DAY_MONTH_LOCAL_FIELD));
-        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.LAST_DAY_MONTH_USD));
+        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.Field.DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.Field.DAY_USD.getFieldName()));
+        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.Field.LAST_DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.Field.LAST_DAY_USD.getFieldName()));
+        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.Field.LAST_DAY_MONTH_LOCAL_FIELD.getFieldName()));
+        assertEquals(AttributeType.DOUBLE, pnl.getAttributeType(Pnl.Field.LAST_DAY_MONTH_USD.getFieldName()));
 
         assertEquals(AttributeType.INTEGER, pnl.getAttributeType(Pnl.Field.BOOK_ID_FIELD.getFieldName()));
         assertEquals(AttributeType.INTEGER, pnl.getAttributeType(Pnl.Field.BUNDLE_ID_FIELD.getFieldName()));
@@ -128,12 +128,12 @@ public class CustomExtractableTest {
         assertEquals(String.class, pnl.getFieldType(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName()));
         assertEquals(Date.class, pnl.getFieldType(Pnl.Field.DATE_FIELD.getFieldName()));
 
-        assertEquals(Double.class, pnl.getFieldType(Pnl.DAY_LOCAL_FIELD));
-        assertEquals(Double.class, pnl.getFieldType(Pnl.DAY_USD));
-        assertEquals(Double.class, pnl.getFieldType(Pnl.LAST_DAY_LOCAL_FIELD));
-        assertEquals(Double.class, pnl.getFieldType(Pnl.LAST_DAY_USD));
-        assertEquals(Double.class, pnl.getFieldType(Pnl.LAST_DAY_MONTH_LOCAL_FIELD));
-        assertEquals(Double.class, pnl.getFieldType(Pnl.LAST_DAY_MONTH_USD));
+        assertEquals(Double.class, pnl.getFieldType(Pnl.Field.DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(Double.class, pnl.getFieldType(Pnl.Field.DAY_USD.getFieldName()));
+        assertEquals(Double.class, pnl.getFieldType(Pnl.Field.LAST_DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(Double.class, pnl.getFieldType(Pnl.Field.LAST_DAY_USD.getFieldName()));
+        assertEquals(Double.class, pnl.getFieldType(Pnl.Field.LAST_DAY_MONTH_LOCAL_FIELD.getFieldName()));
+        assertEquals(Double.class, pnl.getFieldType(Pnl.Field.LAST_DAY_MONTH_USD.getFieldName()));
 
     }
 
@@ -144,12 +144,12 @@ public class CustomExtractableTest {
         assertEquals(pnl.getPnlKey().getCustodianAccount(), pnl.getAttributeValue(Pnl.Field.CUSTODIAN_ACCOUNT_FIELD.getFieldName()));
         assertEquals(pnl.getPnlKey().getDate(), pnl.getAttributeValue(Pnl.Field.DATE_FIELD.getFieldName()));
 
-        assertEquals(pnl.getDayLocal(), pnl.getAttributeValue(Pnl.DAY_LOCAL_FIELD));
-        assertEquals(pnl.getDayUsd(), pnl.getAttributeValue(Pnl.DAY_USD));
-        assertEquals(pnl.getLastDayLocal(), pnl.getAttributeValue(Pnl.LAST_DAY_LOCAL_FIELD));
-        assertEquals(pnl.getLastDayUsd(), pnl.getAttributeValue(Pnl.LAST_DAY_USD));
-        assertEquals(pnl.getLastDayMonthLocal(), pnl.getAttributeValue(Pnl.LAST_DAY_MONTH_LOCAL_FIELD));
-        assertEquals(pnl.getLastDayMonthUsd(), pnl.getAttributeValue(Pnl.LAST_DAY_MONTH_USD));
+        assertEquals(pnl.getDayLocal(), pnl.getAttributeValue(Pnl.Field.DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(pnl.getDayUsd(), pnl.getAttributeValue(Pnl.Field.DAY_USD.getFieldName()));
+        assertEquals(pnl.getLastDayLocal(), pnl.getAttributeValue(Pnl.Field.LAST_DAY_LOCAL_FIELD.getFieldName()));
+        assertEquals(pnl.getLastDayUsd(), pnl.getAttributeValue(Pnl.Field.LAST_DAY_USD.getFieldName()));
+        assertEquals(pnl.getLastDayMonthLocal(), pnl.getAttributeValue(Pnl.Field.LAST_DAY_MONTH_LOCAL_FIELD.getFieldName()));
+        assertEquals(pnl.getLastDayMonthUsd(), pnl.getAttributeValue(Pnl.Field.LAST_DAY_MONTH_USD.getFieldName()));
 
     }
 }

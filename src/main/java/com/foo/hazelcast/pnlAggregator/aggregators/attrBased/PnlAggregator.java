@@ -30,9 +30,9 @@ public class PnlAggregator extends Aggregator<Map.Entry<Long, Pnl>, Map<PnlKey, 
 
     private List<Pnl.Field> keyAttributesInPnl;
     
-    private List<String> attributesToBeAggregatedInPnl;
+    private List<Pnl.Field> attributesToBeAggregatedInPnl;
 
-    public PnlAggregator(List<Pnl.Field> keyAttributes, String[] attributes) {
+    public PnlAggregator(List<Pnl.Field> keyAttributes, Pnl.Field[] attributes) {
         if(keyAttributes == null ||keyAttributes.isEmpty() || attributes == null ||attributes.length == 0) {
             throw new IllegalArgumentException("Key attributes and Aggregation attributes are mandatory for PnlAggregator");
         }
@@ -84,7 +84,8 @@ public class PnlAggregator extends Aggregator<Map.Entry<Long, Pnl>, Map<PnlKey, 
     }
 
     private void setInitialValuesForPnl(Pnl pnl) {
-        for (String attr : this.attributesToBeAggregatedInPnl) {
+        for (Pnl.Field field : this.attributesToBeAggregatedInPnl) {
+        	String attr= field.getFieldName();
             Class<?> fieldType = pnl.getFieldType(attr);
             // this is actually usueful when the field type is primitive. that's why in the aggregator class, we have a special null check
             Object defaultValue = Defaults.defaultValue(fieldType);
@@ -94,7 +95,8 @@ public class PnlAggregator extends Aggregator<Map.Entry<Long, Pnl>, Map<PnlKey, 
     }
 
     private void mergePnl(Pnl source, Pnl destination) throws IllegalAccessException {
-        for (String attr : this.attributesToBeAggregatedInPnl) {
+        for (Pnl.Field field : this.attributesToBeAggregatedInPnl) {
+        	String attr = field.getFieldName();
             Object aggregateAttribute = aggregateAttribute(attr, source, destination);
             destination.setAttributeValue(attr, aggregateAttribute);
         }
